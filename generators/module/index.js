@@ -11,6 +11,9 @@ var NdGenerator = yeoman.generators.Base.extend({
   writing: {
 
     app: function() {
+      this.dest.mkdir('src');
+      this.dest.mkdir('docs');
+
       this.src.copy('_Gruntfile.js', 'Gruntfile.js');
       this.src.copy('jshintrc', '.jshintrc');
     },
