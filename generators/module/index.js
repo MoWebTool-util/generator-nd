@@ -10,6 +10,6 @@ module.exports = yeoman.generators.Base.extend({
       this.spawnCommand('spm', ['init']);
     }
 
-  },
+  }
 
 });

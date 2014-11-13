@@ -1,78 +1,103 @@
 # generator-nd [![Build Status](https://secure.travis-ci.org/crossjs/generator-nd.png?branch=master)](https://travis-ci.org/crossjs/generator-nd)
 
-> 通过命令行生成项目目录及文件（前端部分）。
+> 通过命令行生成项目/组件目录及文件（前端部分）。
 
 
-**安装 yo**
+## 安装
 
-```bash
-npm install -g yo
-```
+- **安装 yo**
 
-**安装 generator**
+    ```bash
+    npm install -g yo
+    ```
 
-```bash
-npm install -g generator-nd
-```
+- **安装 generator**
 
-**使用 generator**
+    ```bash
+    npm install -g generator-nd
+    ```
 
-```bash
-yo nd
-```
+## 使用
 
-生成项目目录结构：
+### 项目目录结构
 
-```
-|-static <外部目录，非本脚本生成>
-    |-cfg/ <配置文件>
-    |-dist/ <构建后的文件>
-    |-src/ <源文件>
-        |-css/ <样式表>
-        |-font/ <字体>
-        |-img/ <图片>
-        |-js/ <Javascript>
-        |-swf/ <Flash>
-        |-theme/ <主题目录>
-            |-default/ <默认主题>
-                |-css/ <样式表>
-                |-font/ <字体>
-                |-img/ <图片>
-    |-.editorconfig
-    |-.gitignore
-    |-.jshintrc
-    |-package.json
-    |-README.md
-```
+- **生成**
 
-**安装 spm**
+    ```bash
+    yo nd
+    ```
 
-```bash
-npm install -g spm
-```
+- **说明**
 
-**使用 sub generator**
+    ```
+    |-static <外部目录，非本脚本生成>
+        |-cfg/ <配置文件>
+        |-dist/ <构建后的文件>
+        |-src/ <源文件>
+            |-css/ <样式表>
+            |-font/ <字体>
+            |-img/ <图片>
+            |-js/ <Javascript>
+            |-swf/ <Flash>
+            |-theme/ <主题目录>
+                |-default/ <默认主题>
+                    |-css/ <样式表>
+                    |-font/ <字体>
+                    |-img/ <图片>
+        |-.editorconfig
+        |-.gitignore
+        |-.jshintrc
+        |-package.json
+        |-README.md
+    ```
 
-```bash
-yo nd:module
-```
 
-生成组件目录结构：
+### 组件目录结构
 
-```
-|-xxxxxx <外部目录，非本脚本生成>
-    |-examples/
-    |-docs/
-    |-tests/
-    |-src/
-    |-.editorconfig
-    |-.gitignore
-    |-.jshintrc
-    |-.spmignore
-    |-Gruntfile.js
-    |-HISTORY.md
-    |-index.js
-    |-package.json
-    |-README.md
-    |-travis.yml
-```
+- **准备**
+
+    *安装 spm*
+
+    ```bash
+    npm install -g spm
+    ```
+
+    *找到 spm 主目录，一般为 `C:\Users\Administrator\.spm`，修改 `spmrc-3x` 文件，增加如下文本：*
+
+    ```
+    [init]
+    template = <替换为 spm 主目录>\spm-template
+    ```
+
+    *命令行终端进入 spm 主目录，拷贝 spm 模板，执行如下命令：*
+
+    ```bash
+    git clone --depth=1 git://github.com/crossjs/spm-template.git spm-template
+    rm -rf spm-template/.git
+    ```
+
+- **生成**
+
+    ```bash
+    yo nd:module
+    ```
+
+- **说明**
+
+    ```
+    |-xxxxxx <外部目录，非本脚本生成>
+        |-examples/
+        |-docs/
+        |-tests/
+        |-src/
+        |-.editorconfig
+        |-.gitignore
+        |-.jshintrc
+        |-.spmignore
+        |-Gruntfile.js
+        |-HISTORY.md
+        |-index.js
+        |-package.json
+        |-README.md
+        |-travis.yml
+    ```
