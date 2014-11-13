@@ -49,6 +49,7 @@ module.exports = yeoman.generators.Base.extend({
       this.directory('src', 'src');
       this.directory('dist', 'dist');
 
+      this.template('_Gruntfile.js', 'Gruntfile.js');
       this.template('_package.json', 'package.json');
       this.template('_README.md', 'README.md');
     },

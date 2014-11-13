@@ -35,14 +35,14 @@
         |-dist/ <构建后的文件>
         |-src/ <源文件>
             |-css/ <样式表>
-            |-font/ <字体>
+            |-fonts/ <字体>
             |-img/ <图片>
             |-js/ <Javascript>
             |-swf/ <Flash>
             |-theme/ <主题目录>
                 |-default/ <默认主题>
                     |-css/ <样式表>
-                    |-font/ <字体>
+                    |-fonts/ <字体>
                     |-img/ <图片>
         |-.editorconfig
         |-.gitignore
@@ -101,3 +101,16 @@
         |-README.md
         |-travis.yml
     ```
+
+
+## 问题
+
+### SASS 文件应该放在哪个目录？
+
+- 某种意义上，SASS 文件也是 CSS 文件，所以存放在 CSS 目录。
+- 同一个项目，除了要保持只用一种 CSS 预处理器。
+- 同一个项目，不应出现 CSS 预处理器与 CSS 混用。
+
+### coffee 文件应该放在哪个目录？
+
+- 同 SASS，存放在 JS 目录，同时避免混用。
