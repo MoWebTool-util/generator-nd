@@ -1,11 +1,11 @@
 'use strict';
-var util = require('util');
+
 var path = require('path');
 var fs = require('fs');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
-var NdGenerator = yeoman.generators.Base.extend({
+module.exports = yeoman.generators.Base.extend({
 
   initializing: function() {
     this.pkg = require('../../package.json');
@@ -65,17 +65,17 @@ var NdGenerator = yeoman.generators.Base.extend({
   _clear: function(destination) {
     destination = this.isPathAbsolute(destination) ? destination : path.join(this.destinationRoot(), destination);
 
-    var files = this.expandFiles('**', { dot: true, cwd: destination });
-
-    var self = this;
-
-    files.filter(function(file) {
+    this.expandFiles('**', { dot: true, cwd: destination })
+    // filter
+    .filter(function(file) {
       return /\.gitignore$/.test(file);
-    }).forEach(function(file) {
+    }.bind(this))
+    // loop
+    .forEach(function(file) {
       fs.unlink(path.join(destination, file), function() {
-        self.log.info(file);
-      });
-    });
+        this.log.info(file);
+      }.bind(this));
+    }.bind(this));
   },
 
   end: function() {
@@ -86,5 +86,3 @@ var NdGenerator = yeoman.generators.Base.extend({
     this._clear('dist');
   }
 });
-
-module.exports = NdGenerator;
