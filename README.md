@@ -31,19 +31,18 @@
 
     ```
     |-static <外部目录，非本脚本生成>
-        |-cfg/ <配置文件>
         |-dist/ <构建后的文件>
         |-src/ <源文件>
-            |-css/ <样式表>
-            |-fonts/ <字体>
-            |-img/ <图片>
             |-js/ <Javascript>
+                |-app/ <模块文件>
+                |-lib/ <第三方库>
+                |-config.js <配置文件>
             |-swf/ <Flash>
             |-theme/ <主题目录>
                 |-default/ <默认主题>
                     |-css/ <样式表>
                     |-fonts/ <字体>
-                    |-img/ <图片>
+                    |-images/ <图片>
         |-.editorconfig
         |-.gitignore
         |-.jshintrc
@@ -87,9 +86,7 @@
     ```
     |-xxxxxx <外部目录，非本脚本生成>
         |-examples/
-        |-docs/
         |-tests/
-        |-src/
         |-.editorconfig
         |-.gitignore
         |-.jshintrc
