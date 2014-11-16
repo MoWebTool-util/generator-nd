@@ -43,7 +43,7 @@ module.exports = function(grunt) {
       config: {
         options: {
           process: function (content, srcpath) {
-            return content.replace('@VERSION', '<%= pkg.version %>');
+            return content.replace('@VERSION', '<%%= pkg.version %>');
           },
         },
         files: [{
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         // remove HH:MM:ss
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyymmdd") %> */\n',
+        banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyymmdd") %> */\n',
         beautify: {
           'ascii_only': true
         },
