@@ -25,6 +25,15 @@ module.exports = function(grunt) {
       files: ['src/js/app/**/*.js']
     },
 
+    jsdoc : {
+      all : {
+        src: ['src/js/app/**/*.js'],
+        options: {
+          destination: 'doc'
+        }
+      }
+    },
+
     exec: {
       // spm 只构建 app 目录下的文件
       'spm-build': 'spm build -I src/js/app -O dist/js/app'
@@ -112,8 +121,21 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('test', ['jshint']);
-  grunt.registerTask('build', ['sass', 'exec:spm-build']);
+  grunt.registerTask('test', [
+    'jshint'
+  ]);
 
-  grunt.registerTask('default', ['test', 'build', 'copy', 'uglify', 'clean']);
+  grunt.registerTask('build', [
+    'sass',
+    'exec:spm-build'
+  ]);
+
+  grunt.registerTask('default', [
+    'test',
+    'build',
+    'copy',
+    'uglify',
+    'jsdoc',
+    'clean'
+  ]);
 };

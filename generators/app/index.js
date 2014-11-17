@@ -6,11 +6,11 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var shell = require('shelljs');
 
-function pad(n) {
-  return n < 10 ? '0' + n.toString(10) : n.toString(10);
-}
-
 function time() {
+  function pad(n) {
+    return n < 10 ? '0' + n.toString(10) : n.toString(10);
+  }
+
   var now = new Date();
   var d = [pad(now.getFullYear()),
               pad(now.getMonth() + 1),
@@ -41,7 +41,7 @@ function user() {
 module.exports = yeoman.generators.Base.extend({
 
   initializing: function() {
-    this.pkg = require('../../package.json');
+    // this.pkg = require('../../package.json');
   },
 
   prompting: function() {
@@ -81,9 +81,8 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
 
     app: function() {
-      this.directory('cfg', 'cfg');
-      this.directory('src', 'src');
       this.directory('dist', 'dist');
+      this.directory('src', 'src');
 
       this.template('_Gruntfile.js', 'Gruntfile.js');
       this.template('_package.json', 'package.json');
@@ -98,28 +97,24 @@ module.exports = yeoman.generators.Base.extend({
 
   },
 
-  // remove temporary files
-  _clear: function(destination) {
-    destination = this.isPathAbsolute(destination) ? destination : path.join(this.destinationRoot(), destination);
-
-    this.expandFiles('**', { dot: true, cwd: destination })
-    // filter
-    .filter(function(file) {
-      return /\.gitignore$/.test(file);
-    }.bind(this))
-    // loop
-    .forEach(function(file) {
-      fs.unlink(path.join(destination, file), function() {
-        this.log.info(file);
-      }.bind(this));
-    }.bind(this));
-  },
-
   end: function() {
     this.log('\n删除临时文件：');
 
-    this._clear('cfg');
-    this._clear('src');
-    this._clear('dist');
+    ['dist', 'src'].forEach(function(dest) {
+      var destination = this.isPathAbsolute(dest) ? dest : path.join(this.destinationRoot(), dest);
+
+      this.expandFiles('**', { dot: true, cwd: destination })
+        // filter
+        .filter(function(file) {
+          return /\.gitignore$/.test(file);
+        }.bind(this))
+        // loop
+        .forEach(function(file) {
+          file = path.join(destination, file);
+          fs.unlink(file, function() {
+            this.log.info(path.relative(process.cwd(), file));
+          }.bind(this));
+        }.bind(this));
+    }.bind(this));
   }
 });
