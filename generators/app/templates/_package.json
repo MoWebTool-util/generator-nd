@@ -2,6 +2,10 @@
   "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
   "description": "<%= description %>",
+  "author": {
+    "name": "<%= user.name %>",
+    "email": "<%= user.email %>"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",

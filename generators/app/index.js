@@ -4,6 +4,39 @@ var path = require('path');
 var fs = require('fs');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
+var shell = require('shelljs');
+
+function pad(n) {
+  return n < 10 ? '0' + n.toString(10) : n.toString(10);
+}
+
+function time() {
+  var now = new Date();
+  var d = [pad(now.getFullYear()),
+              pad(now.getMonth() + 1),
+              pad(now.getDate())].join('-');
+  var t = [pad(now.getHours()),
+              pad(now.getMinutes()),
+              pad(now.getSeconds())].join(':');
+  return [d, t].join(' ');
+}
+
+function user() {
+  var name = shell.exec('git config --get user.name', {
+    silent: true
+  }).output.trim();
+
+  var email = shell.exec('git config --get user.email', {
+    silent: true
+  }).output.trim();
+
+  var result = {
+    name: name ? name : process.env.USER,
+    email: email
+  };
+
+  return result;
+}
 
 module.exports = yeoman.generators.Base.extend({
 
@@ -37,6 +70,9 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function(answers) {
       this.appname = answers.appname;
       this.description = answers.description;
+
+      this.user = user();
+      this.time = time();
 
       done();
     }.bind(this));

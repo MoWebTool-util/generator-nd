@@ -1,7 +1,14 @@
+/**
+ * Description: Gruntfile.js
+ * Author: <%= user.name %> <<%= user.email %>>
+ * Date: <%= time %>
+ */
+
 module.exports = function(grunt) {
 
   'use strict';
 
+  // 显示任务执行时间
   require('time-grunt')(grunt);
 
   // load all grunt tasks
