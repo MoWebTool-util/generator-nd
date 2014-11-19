@@ -18,38 +18,56 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    'cmd-wrap': {
+      proxy: {
+        dest: '',
+        port: 8000,
+        pref: '/static'
+      }
+    },
+
     jshint: {
       options: {
         jshintrc: true
       },
-      files: ['src/js/app/**/*.js']
+      app: {
+        files: ['app/**/*.js']
+      },
+      mod: {
+        files: ['mod/**/*.js']
+      }
     },
 
     jsdoc : {
-      all : {
-        src: ['src/js/app/**/*.js'],
+      app : {
+        src: ['app/**/*.js'],
         options: {
-          destination: 'doc'
+          destination: 'doc/app'
+        }
+      },
+      mod : {
+        src: ['mod/**/*.js'],
+        options: {
+          destination: 'doc/mod'
         }
       }
     },
 
     exec: {
-      // spm 只构建 app 目录下的文件
-      'spm-build': 'spm build -I src/js/app -O dist/js/app'
+      'spm-build': 'spm build --include all --ignore $ --idleading dist --output-directory ./'
     },
 
     sass: {
-      theme: {
+      themes: {
         options: {
           // nested, compact, compressed, expanded
           style: 'compressed'
         },
         files: [{
           expand: true,
-          cwd: 'src/theme/css',
+          cwd: 'themes/css',
           src: ['**/*.scss'],
-          dest: 'dist/theme/css',
+          dest: 'themes/css',
           ext: '.css'
         }]
       }
@@ -59,15 +77,15 @@ module.exports = function(grunt) {
       config: {
         options: {
           process: function (content, srcpath) {
-            return content.replace('@VERSION', '<%%= pkg.version %>');
-          },
+            return content.replace('@VERSION', '<%= pkg.version %>');
+          }
         },
         files: [{
           expand: true,
-          cwd: 'src',
-          src: ['config.js'],
-          dest: 'dist',
-          ext: '.css'
+          cwd: 'lib',
+          src: ['config.js.tpl'],
+          dest: 'lib',
+          ext: '.js'
         }]
       }
     },
@@ -89,27 +107,27 @@ module.exports = function(grunt) {
       app: {
         files: [{
           expand: true,
-          cwd: 'dist/js/app/',
+          cwd: 'dist/app',
           src: '**/*.js',
-          dest: 'dist/js/app/',
+          dest: 'dist/app',
           ext: '.js'
         }]
       },
-      lib: {
+      mod: {
         files: [{
           expand: true,
-          cwd: 'dist/js/lib/',
+          cwd: 'dist/mod',
           src: '**/*.js',
-          dest: 'dist/js/lib/',
+          dest: 'dist/mod',
           ext: '.js'
         }]
       },
       config: {
         files: [{
           expand: true,
-          cwd: 'dist/js',
-          src: 'config.js',
-          dest: 'dist/js',
+          cwd: 'lib',
+          src: ['config.js'],
+          dest: 'lib',
           ext: '.js'
         }]
       }
@@ -121,12 +139,16 @@ module.exports = function(grunt) {
 
   });
 
+  grunt.registerTask('proxy', [
+    'cmd-wrap'
+  ]);
+
   grunt.registerTask('test', [
     'jshint'
   ]);
 
   grunt.registerTask('build', [
-    'sass',
+    // 'sass',
     'exec:spm-build'
   ]);
 

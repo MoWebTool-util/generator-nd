@@ -82,7 +82,10 @@ module.exports = yeoman.generators.Base.extend({
 
     app: function() {
       this.directory('dist', 'dist');
-      this.directory('src', 'src');
+      this.directory('app', 'app');
+      this.directory('lib', 'lib');
+      this.directory('mod', 'mod');
+      this.directory('themes', 'themes');
 
       this.template('_Gruntfile.js', 'Gruntfile.js');
       this.template('_package.json', 'package.json');
@@ -100,7 +103,7 @@ module.exports = yeoman.generators.Base.extend({
   end: function() {
     this.log('\n删除临时文件：');
 
-    ['dist', 'src'].forEach(function(dest) {
+    ['dist', 'app', 'lib', 'mod', 'themes'].forEach(function(dest) {
       var destination = this.isPathAbsolute(dest) ? dest : path.join(this.destinationRoot(), dest);
 
       this.expandFiles('**', { dot: true, cwd: destination })

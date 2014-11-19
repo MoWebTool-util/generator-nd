@@ -1,4 +1,4 @@
-(function(window, seajs) {
+(function(window, seajs, undefined) {
 
   'use strict';
 
@@ -20,13 +20,13 @@
   var map = [];
 
   function addParam(url, name, value) {
-    return url + (url.indexOf('?') === -1 ? '?' : '&') + name + '=' + value;
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + name + (value !== undefined ? ('=' + value) : '');
   }
 
   if (development) { // 开发模式
     timestamp = new Date().getTime();
     map.push(function(url) {
-      return addParam(url.replace('/dist/js/', '/src/js/'), '_ts', timestamp);
+      return addParam(url.replace('/dist/', '/'), '_ts', timestamp);
     });
   } else { //部署模式（路径映射到dist）
     map.push(function(url) {
@@ -35,10 +35,18 @@
   }
 
   seajs.config({
+    base: '/static',
     alias: {
-      '$': 'jquery/jquery'
+      // 'seajs-debug': 'lib/seajs/seajs-debug/1.1.1/seajs-debug',
+      // 'seajs-style': 'lib/seajs/seajs-style/1.1.0/seajs-style',
+      // 'seajs-wrap': 'lib/seajs/seajs-wrap/1.0.2/seajs-wrap',
+      '$': 'lib/jquery/1.11.1/jquery'
     },
     map: map
   });
+
+  // if (seajs.development) {
+  //   seajs.use(['seajs-style', 'seajs-debug']);
+  // }
 
 })(this, this.seajs);
