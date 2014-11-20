@@ -17,6 +17,14 @@
     npm install -g generator-nd
     ```
 
+- **安装 [cmd-wrap](https://github.com/crossjs/cmd-wrap)**
+
+    > 用于开发调试时服务端动态将 CommonJS 模块转为 CMD 模块
+
+    ```bash
+    npm install -g cmd-wrap
+    ```
+
 ## 使用
 
 ### 项目目录结构

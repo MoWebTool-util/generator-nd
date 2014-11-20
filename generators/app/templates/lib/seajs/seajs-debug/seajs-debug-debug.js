@@ -788,5 +788,5 @@ seajs.importStyle("@font-face {    font-family: 'fontello';    src: url('https:/
   }
 
 
-define("seajs-debug-debug", [], {});
+define("lib/seajs/seajs-debug/seajs-debug-debug", [], {});
 })();

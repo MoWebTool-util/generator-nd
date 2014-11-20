@@ -51,5 +51,5 @@ seajs.importStyle = function(cssText, id) {
   }
 }
 
-define("seajs-style-debug", [], {});
+define("lib/seajs/seajs-style/seajs-style-debug", [], {});
 })();

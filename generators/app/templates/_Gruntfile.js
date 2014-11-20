@@ -14,9 +14,11 @@ module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+  var pkg = grunt.file.readJSON('package.json');
+
   grunt.initConfig({
 
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkg,
 
     'cmd-wrap': {
       proxy: {
@@ -76,8 +78,8 @@ module.exports = function(grunt) {
     copy: {
       config: {
         options: {
-          process: function (content, srcpath) {
-            return content.replace('@VERSION', '<%= pkg.version %>');
+          process: function (content/*, srcpath*/) {
+            return content.replace('@VERSION', pkg.version);
           }
         },
         files: [{
@@ -104,24 +106,6 @@ module.exports = function(grunt) {
           'dead_code': true
         }
       },
-      app: {
-        files: [{
-          expand: true,
-          cwd: 'dist/app',
-          src: '**/*.js',
-          dest: 'dist/app',
-          ext: '.js'
-        }]
-      },
-      mod: {
-        files: [{
-          expand: true,
-          cwd: 'dist/mod',
-          src: '**/*.js',
-          dest: 'dist/mod',
-          ext: '.js'
-        }]
-      },
       config: {
         files: [{
           expand: true,
@@ -134,7 +118,6 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      build: ['.build']
     }
 
   });
@@ -149,15 +132,16 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     // 'sass',
-    'exec:spm-build'
+    'exec:spm-build',
+    'copy',
+    'uglify'
   ]);
 
   grunt.registerTask('default', [
     'test',
     'build',
-    'copy',
-    'uglify',
     'jsdoc',
     'clean'
   ]);
+
 };
