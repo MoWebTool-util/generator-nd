@@ -1,4 +1,4 @@
-# generator-nd [![Build Status](https://secure.travis-ci.org/crossjs/generator-nd.png?branch=master)](https://travis-ci.org/crossjs/generator-nd)
+# generator-nd [![Build Status](https://secure.travis-ci.org/ndfront/generator-nd.png?branch=master)](https://travis-ci.org/ndfront/generator-nd)
 
 > 通过命令行生成项目/组件目录及文件（前端部分）。
 
@@ -31,21 +31,28 @@
 
     ```
     |-static <外部目录，非本脚本生成>
+        |-app/ <业务模块>
         |-dist/ <构建后的文件>
-        |-src/ <源文件>
-            |-js/ <Javascript>
-                |-app/ <模块文件>
-                |-lib/ <第三方库>
-                |-config.js <配置文件>
-            |-swf/ <Flash>
-            |-theme/ <主题目录>
-                |-default/ <默认主题>
-                    |-css/ <样式表>
-                    |-fonts/ <字体>
-                    |-images/ <图片>
+        |-lib/ <通用的第三方库>
+            |-jquery/
+                |-jquery.js
+                |-jquery.min.map
+                |-jquery-debug.js
+            |-seajs/
+                |-sea.js
+                |-sea-debug.js
+            |-config.js <配置文件>
+            |-config.js.tpl <配置文件模板>
+        |-mod/ <非业务类的通用模块>
+        |-themes/ <主题目录>
+            |-default/
+                |-css/ <样式>
+                |-fonts/ <字体>
+                |-images/ <图片>
         |-.editorconfig
         |-.gitignore
         |-.jshintrc
+        |-Gruntfile.js
         |-package.json
         |-README.md
     ```
@@ -84,7 +91,7 @@
 - **说明**
 
     ```
-    |-xxxxxx <外部目录，非本脚本生成>
+    |-<name> <外部目录，非本脚本生成>
         |-examples/
         |-tests/
         |-.editorconfig

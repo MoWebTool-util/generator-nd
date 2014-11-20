@@ -1,10 +1,10 @@
 {
   "name": "generator-nd",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "generators/app/index.js",
-  "repository": "crossjs/generator-nd",
+  "repository": "https://github.com/ndfront/generator-nd",
   "author": {
     "name": "李文富",
     "email": "liwenfu@crossjs.com",
