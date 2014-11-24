@@ -30,6 +30,7 @@
     "devDependencies": {
       "seajs-debug": "1.1.1",
       "seajs-style": "1.1.0"
-    }
+    },
+    "buildArgs": "--include all --ignore jquery --idleading {{name}}"
   }
 }

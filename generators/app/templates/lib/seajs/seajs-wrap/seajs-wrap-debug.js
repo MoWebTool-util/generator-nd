@@ -90,5 +90,5 @@ function globalEval(content, uri) {
   }
 }
 
-define("lib/seajs/seajs-wrap/seajs-wrap-debug", [], {});
+define("static/lib/seajs/seajs-wrap/seajs-wrap-debug", [], {});
 })();

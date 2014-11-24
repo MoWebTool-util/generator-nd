@@ -8,6 +8,26 @@ module.exports = function(grunt) {
 
   'use strict';
 
+  function parseAlias() {
+    var fs = require('fs');
+    var path = require('path');
+
+    var root = 'spm_modules';
+
+    var alias = [];
+
+    fs.readdirSync(root).forEach(function(dest) {
+      var version = fs.readdirSync(path.join(root, dest))[0];
+      var spmmain = fs.readFileSync(path.join(root, dest, version, 'package.json'));
+
+      spmmain = JSON.parse(spmmain).spm.main;
+
+      alias.push('\'' + dest + '\': appname + \'/' + root + '/' + dest + '/' + version + '/' + spmmain + '\',');
+    });
+
+    return alias.join('\n      ');
+  }
+
   // 显示任务执行时间
   require('time-grunt')(grunt);
 
@@ -56,7 +76,7 @@ module.exports = function(grunt) {
     },
 
     exec: {
-      'spm-build': 'spm build --include all --ignore $ --idleading dist --output-directory ./'
+      'spm-build': 'spm build'
     },
 
     sass: {
@@ -79,7 +99,9 @@ module.exports = function(grunt) {
       config: {
         options: {
           process: function (content/*, srcpath*/) {
-            return content.replace('@VERSION', pkg.version);
+            return content.replace('@APPNAME', pkg.name)
+                          .replace('@VERSION', pkg.version)
+                          .replace('@ALIAS', parseAlias());
           }
         },
         files: [{

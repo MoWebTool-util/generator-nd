@@ -7,7 +7,8 @@
   }
 
   // 线上部署版本
-  var version = '@VERSION';
+  var appname = 'static';
+  var version = '0.0.0';
 
   // 开关：true开发版本 false部署版本
   var development = seajs.development =
@@ -26,27 +27,25 @@
   if (development) { // 开发模式
     timestamp = new Date().getTime();
     map.push(function(url) {
-      return addParam(url.replace('/dist/', '/'), '_ts', timestamp);
+      return addParam(url, '_ts', timestamp);
     });
-  } else { //部署模式（路径映射到dist）
+  } else { // 部署模式
     map.push(function(url) {
-      return addParam(url, '_v', version);
+      // 仅重定向 app 目录
+      return addParam(url.replace(appname + '/app/', appname + '/dist/' + appname + '/app/'), '_v', version);
     });
   }
 
   seajs.config({
-    base: '/static',
+    base: '/',
     alias: {
-      // 'seajs-debug': 'lib/seajs/seajs-debug/1.1.1/seajs-debug',
-      // 'seajs-style': 'lib/seajs/seajs-style/1.1.0/seajs-style',
-      // 'seajs-wrap': 'lib/seajs/seajs-wrap/1.0.2/seajs-wrap',
-      '$': 'lib/jquery/1.11.1/jquery'
+      '$': appname + '/lib/jquery/jquery'
     },
     map: map
   });
 
   // if (seajs.development) {
-  //   seajs.use(['seajs-style', 'seajs-debug']);
+  //   seajs.use(['seajs-style', 'seajs-debug', 'seajs-text']);
   // }
 
 })(this, this.seajs);
