@@ -109,7 +109,7 @@ module.exports = yeoman.generators.Base.extend({
       this.expandFiles('**', { dot: true, cwd: destination })
         // filter
         .filter(function(file) {
-          return /\.gitignore$/.test(file);
+          return /\.(git|npm)ignore$/.test(file);
         }.bind(this))
         // loop
         .forEach(function(file) {
