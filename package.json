@@ -1,10 +1,13 @@
 {
   "name": "generator-nd",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "https://github.com/ndfront/generator-nd",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ndfront/generator-nd.git"
+  },
   "author": {
     "name": "李文富",
     "email": "liwenfu@crossjs.com",
@@ -17,7 +20,8 @@
     "test": "mocha"
   },
   "files": [
-    "app"
+    "generators/app",
+    "generators/module"
   ],
   "keywords": [
     "yeoman-generator"
@@ -33,9 +37,5 @@
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
-  },
-  "files": [
-    "generators/app",
-    "generators/module"
-  ]
+  }
 }
