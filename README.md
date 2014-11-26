@@ -85,7 +85,7 @@
     *命令行终端进入 spm 主目录，拷贝 spm 模板，执行如下命令：*
 
     ```bash
-    $ git clone --depth=1 git://github.com/crossjs/spm-template.git spm-template && rm -rf spm-template/.git
+    $ rm -rf spm-template && git clone --depth=1 git://github.com/crossjs/spm-template.git spm-template && rm -rf spm-template/.git
     ```
 
 - **生成**
