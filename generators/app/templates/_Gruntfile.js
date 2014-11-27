@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
   'use strict';
 
-  function parseAlias() {
+  function parseAlias(prefix) {
     var fs = require('fs');
     var path = require('path');
 
@@ -20,12 +20,13 @@ module.exports = function(grunt) {
       var version = fs.readdirSync(path.join(root, dest))[0];
       var spmmain = fs.readFileSync(path.join(root, dest, version, 'package.json'));
 
-      spmmain = JSON.parse(spmmain).spm.main;
+      // 移除多余的 `./`
+      spmmain = JSON.parse(spmmain).spm.main.replace(/^\.\//, '');
 
-      alias.push('\'' + dest + '\': appname + \'/' + root + '/' + dest + '/' + version + '/' + spmmain + '\',');
+      alias.push('\'' + dest + '\': \'' + prefix + '/' + root + '/' + dest + '/' + version + '/' + spmmain + '\'');
     });
 
-    return alias.join('\n      ');
+    return alias.join(',\n      ');
   }
 
   // 显示任务执行时间
@@ -87,7 +88,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'themes/css',
+          cwd: 'themes/scss',
           src: ['**/*.scss'],
           dest: 'themes/css',
           ext: '.css'
@@ -99,9 +100,9 @@ module.exports = function(grunt) {
       config: {
         options: {
           process: function (content/*, srcpath*/) {
-            return content.replace('@APPNAME', pkg.name)
-                          .replace('@VERSION', pkg.version)
-                          .replace('@ALIAS', parseAlias());
+            return content.replace(/@APPNAME/g, pkg.name)
+              .replace(/@VERSION/g, pkg.version)
+              .replace(/@ALIAS/g, parseAlias(pkg.name));
           }
         },
         files: [{
@@ -140,30 +141,22 @@ module.exports = function(grunt) {
     },
 
     clean: {
+      themes: {
+        src: ['themes/css']
+      }
     }
 
   });
 
-  grunt.registerTask('proxy', [
-    'cmd-wrap'
-  ]);
+  grunt.registerTask('build-themes', ['clean', 'sass']);
+  grunt.registerTask('build-app', ['exec']);
+  grunt.registerTask('build-lib', ['copy', 'uglify']);
 
-  grunt.registerTask('test', [
-    'jshint'
-  ]);
+  grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('build', ['build-themes', 'build-app', 'build-lib']);
+  grunt.registerTask('doc', ['jsdoc']);
 
-  grunt.registerTask('build', [
-    // 'sass',
-    'exec:spm-build',
-    'copy',
-    'uglify'
-  ]);
-
-  grunt.registerTask('default', [
-    'test',
-    'build',
-    'jsdoc',
-    'clean'
-  ]);
+  grunt.registerTask('proxy', ['cmd-wrap']);
+  grunt.registerTask('default', ['test', 'build', 'doc']);
 
 };

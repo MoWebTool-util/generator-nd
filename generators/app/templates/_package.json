@@ -24,13 +24,9 @@
     "main": "app/index/index.js",
     "output": ["app/**/index.js"],
     "dependencies": {
-      "seajs": "2.3.0",
-      "jquery": "1.11.1"
     },
     "devDependencies": {
-      "seajs-debug": "1.1.1",
-      "seajs-style": "1.1.0"
     },
-    "buildArgs": "--include all --ignore jquery --idleading {{name}}"
+    "buildArgs": "--include all --idleading {{name}}"
   }
 }

@@ -40,21 +40,20 @@
     ```
     |-static <外部目录，非本脚本生成>
         |-app/ <业务模块>
-        |-dist/ <构建后的文件>
+        |-dist/ <构建后的 APP 文件>
         |-lib/ <通用的第三方库>
-            |-jquery/
-                |-jquery.js
-                |-jquery.min.map
-                |-jquery-debug.js
             |-seajs/
                 |-sea.js
                 |-sea-debug.js
-            |-config.js <配置文件>
+            |-config.js <配置文件，READONLY>
             |-config.js.tpl <配置文件模板>
-        |-mod/ <非业务类的通用模块>
+        |-mod/ <通用模块，非业务类>
+        |-node_modules/ <NPM 模块>
+        |-spm_modules/ <SPM 模块>
         |-themes/ <主题目录>
             |-default/
                 |-css/ <样式>
+                |-scss/ <SASS>
                 |-fonts/ <字体>
                 |-images/ <图片>
         |-.editorconfig
@@ -75,6 +74,14 @@
     $ npm install -g spm
     ```
 
+    *配置 spm*
+
+    > 使用本地源
+
+    ```bash
+    $ spm config source:spm.url http://spm.crossjs.com
+    ```
+
     *找到 spm 主目录，一般为 `C:\Users\Administrator\.spm`，修改 `spmrc-3x` 文件，增加如下文本：*
 
     ```
@@ -91,6 +98,8 @@
 - **生成**
 
     ```bash
+    $ mkdir <name>
+    $ cd <name>
     $ yo nd:module
     ```
 
@@ -99,6 +108,8 @@
     ```
     |-<name> <外部目录，非本脚本生成>
         |-examples/
+        |-node_modules/
+        |-spm_modules/
         |-tests/
         |-.editorconfig
         |-.gitignore
@@ -111,18 +122,3 @@
         |-README.md
         |-travis.yml
     ```
-
-
-## 讨论
-
-> 以下为待确认的问题
-
-### SASS 文件应该放在哪个目录？
-
-- 某种意义上，SASS 文件也是 CSS 文件，所以存放在 CSS 目录。
-- 同一个项目，除了要保持只用一种 CSS 预处理器。
-- 同一个项目，不应出现 CSS 预处理器与 CSS 混用。
-
-### coffee 文件应该放在哪个目录？
-
-- 同 SASS，存放在 JS 目录，同时避免混用。
