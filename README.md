@@ -1,6 +1,6 @@
 # generator-nd [![Build Status](https://secure.travis-ci.org/ndfront/generator-nd.png?branch=master)](https://travis-ci.org/ndfront/generator-nd)
 
-> 通过命令行生成项目/组件目录及文件（前端部分）。
+> Yeoman 生成器，用于生成基于 SeaJS/SPM 的前端项目/组件文件结构，样例代码见 [examples](https://github.com/ndfront/examples)。
 
 
 ## 安装
@@ -15,14 +15,6 @@
 
     ```bash
     $ npm install -g generator-nd
-    ```
-
-- **安装 [cmd-wrap](https://github.com/crossjs/cmd-wrap)**
-
-    > 用于开发调试时服务端动态将 CommonJS 模块转为 CMD 模块
-
-    ```bash
-    $ npm install -g cmd-wrap
     ```
 
 ## 使用
