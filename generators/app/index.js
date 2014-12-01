@@ -93,6 +93,7 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     projectfiles: function() {
+      this.src.copy('config.rb', 'config.rb');
       this.src.copy('editorconfig', '.editorconfig');
       this.src.copy('gitignore', '.gitignore');
       this.src.copy('jshintrc', '.jshintrc');

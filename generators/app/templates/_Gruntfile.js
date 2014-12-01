@@ -41,11 +41,14 @@ module.exports = function(grunt) {
 
     pkg: pkg,
 
-    'cmd-wrap': {
-      proxy: {
-        dest: '',
-        port: 8000,
-        pref: '/static'
+    wrap: {
+      server: {
+        base: '..',
+        port: 8080,
+        wrap: function(url) {
+          url = url.replace(new RegExp('^/' + pkg.name), '');
+          return /^\/(app|mod|spm_modules).+\.js$/.test(url);
+        }
       }
     },
 
@@ -53,12 +56,8 @@ module.exports = function(grunt) {
       options: {
         jshintrc: true
       },
-      app: {
-        files: ['app/**/*.js']
-      },
-      mod: {
-        files: ['mod/**/*.js']
-      }
+      app: ['app/**/*.js'],
+      mod: ['mod/**/*.js']
     },
 
     jsdoc : {
@@ -83,14 +82,15 @@ module.exports = function(grunt) {
     sass: {
       themes: {
         options: {
+          compass: true,
           // nested, compact, compressed, expanded
           style: 'compressed'
         },
         files: [{
           expand: true,
-          cwd: 'themes/scss',
+          cwd: 'themes/default/scss',
           src: ['**/*.scss'],
-          dest: 'themes/css',
+          dest: 'themes/default/css',
           ext: '.css'
         }]
       }
@@ -142,7 +142,7 @@ module.exports = function(grunt) {
 
     clean: {
       themes: {
-        src: ['themes/css']
+        src: ['themes/default/css']
       }
     }
 
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['build-themes', 'build-app', 'build-lib']);
   grunt.registerTask('doc', ['jsdoc']);
 
-  grunt.registerTask('proxy', ['cmd-wrap']);
+  grunt.registerTask('server', ['copy', 'wrap']);
   grunt.registerTask('default', ['test', 'build', 'doc']);
 
 };
