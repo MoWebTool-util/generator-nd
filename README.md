@@ -68,13 +68,7 @@
 
     *配置 spm*
 
-    > 使用本地源
-
-    ```bash
-    $ spm config source:spm.url http://spm.crossjs.com
-    ```
-
-    *找到 spm 主目录，一般为 `C:\Users\Administrator\.spm`，修改 `spmrc-3x` 文件，增加如下文本：*
+    *找到 spm 主目录，一般为 `C:\Users\Administrator\.spm`，修改/新建 `spmrc-3x` 文件，增加如下文本：*
 
     ```
     [init]
