@@ -32,10 +32,7 @@
 
   seajs.config({
     base: '/',
-    alias: {
-      // only for debug
-      @ALIAS
-    },
+    alias: {},
     map: map,
     debug: debug
   });

@@ -8,27 +8,6 @@ module.exports = function(grunt) {
 
   'use strict';
 
-  function parseAlias(prefix) {
-    var fs = require('fs');
-    var path = require('path');
-
-    var root = 'spm_modules';
-
-    var alias = [];
-
-    fs.readdirSync(root).forEach(function(dest) {
-      var version = fs.readdirSync(path.join(root, dest))[0];
-      var spmmain = fs.readFileSync(path.join(root, dest, version, 'package.json'));
-
-      // 移除多余的 `./`
-      spmmain = JSON.parse(spmmain).spm.main.replace(/^\.\//, '');
-
-      alias.push('\'' + dest + '\': \'' + prefix + '/' + root + '/' + dest + '/' + version + '/' + spmmain + '\'');
-    });
-
-    return alias.join(',\n      ');
-  }
-
   // 显示任务执行时间
   require('time-grunt')(grunt);
 
@@ -60,14 +39,14 @@ module.exports = function(grunt) {
       mod: ['mod/**/*.js']
     },
 
-    jsdoc : {
-      app : {
+    jsdoc: {
+      app: {
         src: ['app/**/*.js'],
         options: {
           destination: 'doc/app'
         }
       },
-      mod : {
+      mod: {
         src: ['mod/**/*.js'],
         options: {
           destination: 'doc/mod'
@@ -101,8 +80,7 @@ module.exports = function(grunt) {
         options: {
           process: function (content/*, srcpath*/) {
             return content.replace(/@APPNAME/g, pkg.name)
-              .replace(/@VERSION/g, pkg.version)
-              .replace(/@ALIAS/g, parseAlias(pkg.name));
+              .replace(/@VERSION/g, pkg.version);
           }
         },
         files: [{
