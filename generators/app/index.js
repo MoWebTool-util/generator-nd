@@ -1,10 +1,10 @@
 'use strict';
 
-var path = require('path');
 var fs = require('fs');
+var path = require('path');
+var shell = require('shelljs');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
-var shell = require('shelljs');
 
 function time() {
   function pad(n) {

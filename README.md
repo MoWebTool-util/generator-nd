@@ -17,6 +17,12 @@
     $ npm install -g generator-nd
     ```
 
+- **安装 spm**
+
+    ```bash
+    $ npm install -g spm
+    ```
+
 ## 使用
 
 ### 项目目录结构
@@ -58,29 +64,6 @@
 
 ### 组件目录结构
 
-- **准备**
-
-    *安装 spm*
-
-    ```bash
-    $ npm install -g spm
-    ```
-
-    *配置 spm*
-
-    *找到 spm 主目录，一般为 `C:\Users\Administrator\.spm`，修改/新建 `spmrc-3x` 文件，增加如下文本：*
-
-    ```
-    [init]
-    template = <替换为 spm 主目录>\spm-template
-    ```
-
-    *命令行终端进入 spm 主目录，拷贝 spm 模板，执行如下命令：*
-
-    ```bash
-    $ rm -rf spm-template && git clone --depth=1 git://github.com/crossjs/spm-template.git spm-template && rm -rf spm-template/.git
-    ```
-
 - **生成**
 
     ```bash
@@ -101,10 +84,10 @@
         |-.gitignore
         |-.jshintrc
         |-.spmignore
+        |-.travis.yml
         |-Gruntfile.js
         |-HISTORY.md
         |-index.js
         |-package.json
         |-README.md
-        |-travis.yml
     ```
