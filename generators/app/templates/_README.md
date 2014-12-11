@@ -15,12 +15,13 @@
 - 调试服务器
 
     ```bash
-    $ grunt server
+    $ grunt develop
+    $ grunt release
     ```
 
-    浏览器中访问 http://127.0.0.1:8080
+    浏览器中访问 http://127.0.0.1:8851
 
-    DEBUG 请访问 http://127.0.0.1:8080/?debug
+    DEBUG 请访问 http://127.0.0.1:8851/?debug
 
 ## 样例
 
