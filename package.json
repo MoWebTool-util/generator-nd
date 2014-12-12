@@ -1,6 +1,6 @@
 {
   "name": "generator-nd",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "scaffolds out front-end files",
   "keywords": [
     "yeoman-generator",
