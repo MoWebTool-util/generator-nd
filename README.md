@@ -1,4 +1,10 @@
-# generator-nd [![NPM version](https://badge.fury.io/js/generator-nd.png)](http://badge.fury.io/js/generator-nd) [![Build Status](https://secure.travis-ci.org/ndfront/generator-nd.png?branch=master)](https://travis-ci.org/ndfront/generator-nd)
+# generator-nd
+
+[![NPM version](https://img.shields.io/npm/v/generator-nd.svg?style=flat-square)](https://npmjs.org/package/generator-nd)
+[![Build Status](https://img.shields.io/travis/ndfront/generator-nd.svg?style=flat-square)](https://travis-ci.org/ndfront/generator-nd)
+[![NPM downloads](http://img.shields.io/npm/dm/generator-nd.svg?style=flat-square)](https://npmjs.org/package/generator-nd)
+[![David](http://img.shields.io/david/ndfront/generator-nd.svg?style=flat-square)](https://npmjs.org/package/generator-nd)
+[![David](http://img.shields.io/david/dev/ndfront/generator-nd.svg?style=flat-square)](https://npmjs.org/package/generator-nd)
 
 > Yeoman 生成器，用于生成基于 SeaJS/SPM 的前端项目/组件文件结构，样例代码见 [examples](https://github.com/ndfront/examples)。
 
