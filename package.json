@@ -1,6 +1,6 @@
 {
   "name": "generator-nd",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "scaffolds out front-end files",
   "keywords": [
     "yeoman-generator",
@@ -44,9 +44,5 @@
     {
       "type": "MIT"
     }
-  ],
-  "files": [
-    "generators",
-    "lib"
   ]
 }
