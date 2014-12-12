@@ -4,9 +4,9 @@
  * Date: <%= time %>
  */
 
-module.exports = function(grunt) {
+'use strict';
 
-  'use strict';
+module.exports = function(grunt) {
 
   // 显示任务执行时间
   require('time-grunt')(grunt);

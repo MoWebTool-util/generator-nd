@@ -2,98 +2,75 @@
 
 var fs = require('fs');
 var path = require('path');
-var shell = require('shelljs');
-var spmrc = require('spmrc');
 var yeoman = require('yeoman-generator');
+var yosay = require('yosay');
+
+var user = require('../../lib/user.js');
+var time = require('../../lib/time.js');
 
 module.exports = yeoman.generators.Base.extend({
 
-  initializing: function() {
-    var spmHome = path.join(spmrc.spmrcfile, '..');
-    var tmpHome = path.join(spmHome, 'spm-template');
-    var gitUrl = 'git://github.com/crossjs/spm-template.git';
-    var gitTodo = 'clone';
+  prompting: function() {
+    var done = this.async();
 
-    if (fs.existsSync(tmpHome)) {
-      // 有 .git
-      if (fs.existsSync(path.join(tmpHome, '.git'))) {
-        gitTodo = 'update';
-      } else {
-        // 上级有 .git
-        if (fs.existsSync(path.join(tmpHome, '..', '.git'))) {
-          gitTodo = 'update';
-          shell.exec([
-            'cd ' + tmpHome,
-            'cd ..',
-            'mv -f .git spm-template'
-          ].join(' && '), {
-            silent: true
-          });
-        } else {
-          shell.exec([
-            'rm -rf ' + tmpHome
-          ].join(' && '), {
-            silent: true
-          });
-        }
+    // Have Yeoman greet the user.
+    this.log(yosay(
+      'Welcome to the tiptop ND module generator!'
+    ));
+
+    var prompts = [
+      {
+        type: 'input',
+        name: 'appname',
+        message: '模块名？',
+        default: this.appname
+      },
+      {
+        type: 'input',
+        name: 'version',
+        message: '版本号？',
+        default: '0.0.0'
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: '模块简介？',
+        default: this.description
       }
-    }
+    ];
 
-    if (gitTodo === 'update') {
-      this.log('\n更新 spm-template ...');
-      shell.exec([
-        'cd ' + tmpHome,
-        'git pull'
-      ].join(' && '), {
-        silent: true
-      });
-      this.log('\n更新 spm-template 完成');
-    } else if (gitTodo === 'clone') {
-      this.log('\n下载 spm-template ...');
-      shell.exec([
-        'git clone --depth=1 ' + gitUrl + ' ' + tmpHome
-      ].join(' && '), {
-        silent: true
-      });
-      this.log('\n下载 spm-template 完成');
-    }
+    this.prompt(prompts, function(answers) {
+      this.appname = answers.appname;
+      this.version = answers.version;
+      this.description = answers.description;
 
-    shell.exec([
-      'cd ' + tmpHome,
-      'mv -f .git ..'
-    ].join(' && '), {
-      silent: true
-    });
+      this.user = user();
+      this.time = time();
 
-    // edit spmrc-3x
-    spmrc.set('init.template', tmpHome);
-
-    this.tmpHome = tmpHome;
+      done();
+    }.bind(this));
   },
 
   writing: {
 
     app: function() {
-      this.spawnCommand('spm', ['init'], { stdio: 'inherit' });
+      this.directory('examples', 'examples');
+      this.directory('tests', 'tests');
+
+      this.template('_Gruntfile.js', 'Gruntfile.js');
+      this.template('_HISTORY.md', 'HISTORY.md');
+      this.template('_index.js', 'index.js');
+      this.template('_package.json', 'package.json');
+      this.template('_README.md', 'README.md');
+
+      this.src.copy('_config.rb', 'config.rb');
+      this.src.copy('_editorconfig', '.editorconfig');
+      this.src.copy('_gitignore', '.gitignore');
+      this.src.copy('_jshintrc', '.jshintrc');
+      this.src.copy('_spmignore', '.spmignore');
+      this.src.copy('_travis.yml', '.travis.yml');
     }
 
-  },
-
-  end: function() {
-    var tmpHome = this.tmpHome;
-    var travis = path.join(this.destinationRoot(), '.travis.yml');
-    var interval = setInterval(function() {
-      if (fs.existsSync(travis)) {
-        clearInterval(interval);
-        shell.exec([
-          'cd ' + tmpHome,
-          'cd ..',
-          'mv -f .git spm-template'
-        ].join(' && '), {
-          silent: true
-        });
-      }
-    }, 500);
   }
 
 });

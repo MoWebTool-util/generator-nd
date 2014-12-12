@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "name": "<%= appname %>",
   "version": "0.0.0",
   "description": "<%= description %>",
   "author": {
@@ -15,7 +15,7 @@
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-exec": "^0.4.6",
     "grunt-jsdoc": "^0.5.7",
-    "grunt-spm-server": "^0.0.1",
+    "grunt-spm-server": "^0.0.3",
     "matchdep": "^0.3.0",
     "time-grunt": "^1.0.0"
   },

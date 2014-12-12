@@ -10,7 +10,7 @@
     $ grunt build
     ```
 
-    构建后的 app 文件存放于 dist 目录，css 文件存放于 themes/default/css 目录
+    构建后的 app 文件存放于 dist 目录，css 文件存放于 theme/default/css 目录
 
 - 调试服务器
 
@@ -26,10 +26,10 @@
 ## 样例
 
     ```html
-    <script src="<package name>/lib/seajs/sea.js"></script>
-    <script src="<package name>/lib/config.js"></script>
+    <script src="<%= appname %>/lib/seajs/sea.js"></script>
+    <script src="<%= appname %>/lib/config.js"></script>
     <script>
-      // app/**/*.js
-      seajs.use('<package name>/app/<folder>/<file>');
+      // <%= appname %>/app/**/*.js
+      seajs.use('<%= appname %>/app/<folder>/<file>');
     </script>
     ```
