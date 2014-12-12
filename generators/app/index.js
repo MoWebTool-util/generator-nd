@@ -76,16 +76,16 @@ module.exports = yeoman.generators.Base.extend({
     this.log('\n删除临时文件：');
 
     ['app', 'lib', 'mod', 'theme'].forEach(function(dest) {
-      var destination = this.isPathAbsolute(dest) ? dest : path.join(this.destinationRoot(), dest);
+      dest = path.join(this.destinationRoot(), dest);
 
-      this.expandFiles('**', { dot: true, cwd: destination })
+      this.expandFiles('**', { dot: true, cwd: dest })
         // filter
         .filter(function(file) {
-          return /^\.(git|npm)ignore$/.test(file);
+          return /\.(git|npm)ignore$/.test(file);
         })
         // loop
         .forEach(function(file) {
-          file = path.join(destination, file);
+          file = path.join(dest, file);
           fs.unlink(file, function() {
             this.log.info(path.relative(process.cwd(), file));
           }.bind(this));
