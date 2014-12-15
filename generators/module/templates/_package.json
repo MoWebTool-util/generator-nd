@@ -3,17 +3,17 @@
   "version": "<%= version %>",
   "description": "<%= description %>",
   "keywords": [],
-  "homepage": "",
+  "homepage": "https://github.com/ndfront/<%= appname %>",
   "author": {
     "name": "<%= user.name %>",
     "email": "<%= user.email %>"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ndfront/<%= appname %>.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/ndfront/<%= appname %>/issues"
   },
   "licenses": "MIT",
   "devDependencies": {
