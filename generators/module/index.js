@@ -41,7 +41,7 @@ module.exports = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function(answers) {
       this.appname = answers.appname.replace(/\s/g, '-');
-      this.varname = answers.appname.replace(/\s(\w)/g, function($0, $1) {
+      this.varname = answers.appname.replace(/^nd\s(\w)/, function($0, $1) {
         return $1.toUpperCase();
       });
       this.version = answers.version;
