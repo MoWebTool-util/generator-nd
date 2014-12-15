@@ -13,6 +13,6 @@ $ spm install <%= appname %> --save
 ## 使用
 
 ```js
-var <%= appname %> = require('<%= appname %>');
-// use <%= appname %>
+var <%= varname %> = require('<%= appname %>');
+// use <%= varname %>
 ```

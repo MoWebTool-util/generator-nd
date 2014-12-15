@@ -6,6 +6,6 @@
 
 'use strict';
 
-var <%= appname %>;
+var <%= varname %>;
 
-module.exports = <%= appname %>;
+module.exports = <%= varname %>;

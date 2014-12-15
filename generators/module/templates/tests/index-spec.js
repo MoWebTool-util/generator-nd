@@ -1,7 +1,7 @@
 var expect = require('expect.js');
-var <%= appname %> = require('../index');
+var <%= varname %> = require('../index');
 
-describe('<%= appname %>', function() {
+describe('<%= varname %>', function() {
 
   it('normal usage', function() {
 
