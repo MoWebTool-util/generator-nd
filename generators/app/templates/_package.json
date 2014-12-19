@@ -1,6 +1,6 @@
 {
   "name": "<%= appname %>",
-  "version": "0.0.0",
+  "version": "<%= version %>",
   "description": "<%= description %>",
   "author": {
     "name": "<%= user.name %>",

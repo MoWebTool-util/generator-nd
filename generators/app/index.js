@@ -40,9 +40,9 @@ module.exports = yeoman.generators.Base.extend({
     ];
 
     this.prompt(prompts, function(answers) {
-      this.appname = answers.appname;
+      this.appname = answers.appname.replace(/\s/g, '-');
       this.version = answers.version;
-      this.description = answers.description;
+      this.description = answers.description.replace(/([\\\"])/g, '\\$1');
 
       this.user = user();
       this.time = time();
