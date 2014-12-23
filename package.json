@@ -1,6 +1,6 @@
 {
   "name": "generator-nd",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "generate front-end files for projects and modules",
   "keywords": [
     "yeoman-generator",

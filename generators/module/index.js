@@ -1,7 +1,5 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
