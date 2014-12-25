@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     },
 
     sass: {
-      themes: {
+      theme: {
         options: {
           compass: true,
           // nested, compact, compressed, expanded
@@ -73,9 +73,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'themes/default/scss',
+          cwd: 'theme/default/scss',
           src: ['**/*.scss'],
-          dest: 'themes/default/css',
+          dest: 'theme/default/css',
           ext: '.css'
         }]
       }
@@ -103,19 +103,19 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      themes: {
-        src: ['themes/default/css']
+      theme: {
+        src: ['theme/default/css']
       }
     }
 
   });
 
-  grunt.registerTask('build-themes', ['clean', 'sass']);
+  grunt.registerTask('build-theme', ['clean', 'sass']);
   grunt.registerTask('build-app', ['exec']);
   grunt.registerTask('build-lib', ['uglify']);
 
   grunt.registerTask('test', ['jshint']);
-  grunt.registerTask('build', ['build-themes', 'build-app', 'build-lib']);
+  grunt.registerTask('build', ['build-theme', 'build-app', 'build-lib']);
   grunt.registerTask('doc', ['jsdoc']);
 
   grunt.registerTask('develop', ['server:develop']);
