@@ -1,5 +1,6 @@
 'use strict';
 
+var async = require('async');
 var fs = require('fs');
 var path = require('path');
 var yeoman = require('yeoman-generator');
@@ -73,23 +74,43 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   end: function() {
-    this.log('\n删除临时文件：');
+    var that = this;
 
-    ['app', 'lib', 'mod', 'theme'].forEach(function(dest) {
-      dest = path.join(this.destinationRoot(), dest);
+    function handleFolder(dest, folderDone) {
+      dest = path.join(that.destinationRoot(), dest);
 
-      this.expandFiles('**', { dot: true, cwd: dest })
+      function handleFile(file, fileDone) {
+        file = path.join(dest, file);
+
+        fs.unlink(file, function() {
+          that.log.info(path.relative(process.cwd(), file), 'cleared!');
+          fileDone();
+        });
+      }
+
+      var files = that.expandFiles('**', { dot: true, cwd: dest })
         // filter
         .filter(function(file) {
           return /\.(git|npm)ignore$/.test(file);
-        })
-        // loop
-        .forEach(function(file) {
-          file = path.join(dest, file);
-          fs.unlink(file, function() {
-            this.log.info(path.relative(process.cwd(), file));
-          }.bind(this));
-        }.bind(this));
-    }.bind(this));
+        });
+
+      async.each(files, handleFile, function(err) {
+        if (err) {
+          that.log.error(err);
+        }
+
+        folderDone();
+      });
+    }
+
+    that.log.info('Cleaning temporary files ...');
+    async.each(['app', 'lib', 'mod', 'theme'], handleFolder, function(err) {
+      if (err) {
+        that.log.error(err);
+      }
+
+      that.log();
+      that.log.ok('万事俱备，只欠 `npm/spm install`。');
+    });
   }
 });
