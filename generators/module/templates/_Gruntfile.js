@@ -22,6 +22,15 @@ module.exports = function(grunt) {
       }
     },
 
+    jsdoc: {
+      api: {
+        src: ['index.js', 'src/**/*.js'],
+        options: {
+          destination: 'doc'
+        }
+      }
+    },
+
     jshint: {
       files: ['index.js', 'src/**/*.js'],
       options: {
@@ -36,10 +45,9 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('test', ['jshint','exec:spm-test']);
-
+  grunt.registerTask('doc', ['jsdoc']);
+  grunt.registerTask('test', ['jshint', 'exec:spm-test']);
   grunt.registerTask('publish', ['test', 'exec:spm-publish']);
-
   grunt.registerTask('default', ['server']);
 
 };

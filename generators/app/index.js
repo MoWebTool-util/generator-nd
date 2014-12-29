@@ -45,7 +45,7 @@ module.exports = yeoman.generators.Base.extend({
       this.version = answers.version;
       this.description = answers.description.replace(/([\\\"])/g, '\\$1');
 
-      this.user = user();
+      this.user = user(this);
       this.time = time();
 
       done();
