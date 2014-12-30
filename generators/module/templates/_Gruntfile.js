@@ -1,9 +1,3 @@
-/**
- * Description: Gruntfile.js
- * Author: <%= user.name %> <<%= user.email %>>
- * Date: <%= time %>
- */
-
 'use strict';
 
 module.exports = function(grunt) {
@@ -41,11 +35,15 @@ module.exports = function(grunt) {
     exec: {
       'spm-publish': 'spm publish',
       'spm-test': 'spm test'
+    },
+
+    clean: {
+      doc: ['doc']
     }
 
   });
 
-  grunt.registerTask('doc', ['jsdoc']);
+  grunt.registerTask('doc', ['clean:doc', 'jsdoc']);
   grunt.registerTask('test', ['jshint', 'exec:spm-test']);
   grunt.registerTask('publish', ['test', 'exec:spm-publish']);
   grunt.registerTask('default', ['server']);
