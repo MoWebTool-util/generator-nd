@@ -1,5 +1,7 @@
 'use strict';
 
+require('../../lib/update.js');
+
 var async = require('async');
 var fs = require('fs');
 var path = require('path');
@@ -113,4 +115,5 @@ module.exports = yeoman.generators.Base.extend({
       that.log.ok('万事俱备，只欠 `npm/spm install`。');
     });
   }
+
 });

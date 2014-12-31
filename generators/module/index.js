@@ -1,5 +1,7 @@
 'use strict';
 
+require('../../lib/update.js');
+
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
