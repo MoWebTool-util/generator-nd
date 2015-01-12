@@ -23,7 +23,8 @@ module.exports = function(grunt) {
       develop: {
         options: {
           // 指向上级目录
-          base: '..'
+          base: '..',
+          release: false
         }
       },
       // 仿真线上环境
