@@ -1,7 +1,5 @@
 /**
- * Description: Gruntfile.js
- * Author: <%= user.name %> <<%= user.email %>>
- * Date: <%= time %>
+ * @author: <%= user.name %> <<%= user.email %>> - <%= time %>
  */
 
 'use strict';
@@ -83,7 +81,6 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        // remove HH:MM:ss
         banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyymmdd") %> */\n',
         beautify: {
           'ascii_only': true
@@ -103,9 +100,8 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      theme: {
-        src: ['theme/default/css']
-      }
+      doc: ['doc'],
+      theme: ['theme/default/css']
     }
 
   });
@@ -116,7 +112,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['jshint']);
   grunt.registerTask('build', ['build-theme', 'build-app', 'build-lib']);
-  grunt.registerTask('doc', ['jsdoc']);
+  grunt.registerTask('doc', ['clean:doc', 'jsdoc']);
 
   grunt.registerTask('develop', ['server:develop']);
   grunt.registerTask('release', ['server:release']);

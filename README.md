@@ -42,7 +42,7 @@
 - **说明**
 
     ```
-    |-static <外部目录，非本脚本生成>
+    |-<name> <外部目录，非本脚本生成>
         |-app/ <业务模块>
         |-dist/ <构建后的 APP 文件>
         |-lib/ <通用的第三方库>
@@ -54,12 +54,12 @@
         |-mod/ <通用模块，非业务类>
         |-node_modules/ <NPM 模块>
         |-spm_modules/ <SPM 模块>
-        |-themes/ <主题目录>
+        |-theme/ <主题目录>
             |-default/
                 |-css/ <样式>
                 |-scss/ <SASS>
-                |-fonts/ <字体>
-                |-images/ <图片>
+                |-font/ <字体>
+                |-img/ <图片>
         |-.editorconfig
         |-.gitignore
         |-.jshintrc

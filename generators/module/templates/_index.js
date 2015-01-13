@@ -1,7 +1,6 @@
 /**
- * Description: index.js
- * Author: <%= user.name %> <<%= user.email %>>
- * Date: <%= time %>
+ * @module: <%= appname %>
+ * @author: <%= user.name %> <<%= user.email %>> - <%= time %>
  */
 
 'use strict';

@@ -7,32 +7,33 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
-describe('nd:app', function () {
+describe('nd:module', function () {
 
   describe('all defaults', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
-        .inDir(path.join(os.tmpdir(), './temp-test-app'))
+      helpers.run(path.join(__dirname, '../generators/module'))
+        .inDir(path.join(os.tmpdir(), './temp-test-module'))
         .on('end', done);
     });
 
     it('creates files', function () {
       assert.file([
-        'app',
-        'lib',
-        'mod',
-        'theme',
+        'examples',
+        'tests',
         '.editorconfig',
+        '.gitignore',
         '.jshintrc',
+        '.travis.yml',
         'config.rb',
         'Gruntfile.js',
         'HISTORY.md',
-        'README.md',
-        'package.json'
+        'index.js',
+        'package.json',
+        'README.md'
       ]);
 
       assert.fileContent([
-        ['package.json', /"name": "temp-test-app"/],
+        ['package.json', /"name": "temp-test-module"/],
         ['package.json', /"version": "0\.0\.0"/]
       ]);
     });
@@ -40,8 +41,8 @@ describe('nd:app', function () {
 
   describe('with name and version', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
-        .inDir(path.join(os.tmpdir(), './temp-test-app-2'))
+      helpers.run(path.join(__dirname, '../generators/module'))
+        .inDir(path.join(os.tmpdir(), './temp-test-module-2'))
         .withPrompt({
           appname: 'test',
           version: '0.0.1'
@@ -51,17 +52,18 @@ describe('nd:app', function () {
 
     it('creates files', function () {
       assert.file([
-        'app',
-        'lib',
-        'mod',
-        'theme',
+        'examples',
+        'tests',
         '.editorconfig',
+        '.gitignore',
         '.jshintrc',
-        'Gruntfile.js',
-        'README.md',
+        '.travis.yml',
         'config.rb',
+        'Gruntfile.js',
         'HISTORY.md',
-        'package.json'
+        'index.js',
+        'package.json',
+        'README.md'
       ]);
 
       assert.fileContent([
