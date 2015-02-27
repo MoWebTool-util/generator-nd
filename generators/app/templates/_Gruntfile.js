@@ -24,6 +24,8 @@ module.exports = function(grunt) {
         options: {
           // 指向上级目录
           base: '..',
+          // host: '127.0.0.1',
+          // post: 80,
           release: false
         }
       },
@@ -31,6 +33,8 @@ module.exports = function(grunt) {
       release: {
         options: {
           base: '..',
+          // host: '127.0.0.1',
+          // post: 80,
           release: true
         }
       }
