@@ -1,5 +1,7 @@
 # generator-nd
 
+Deprecated. use [dong](https://github.com/crossjs/dongg) init instead.
+
 [![NPM version](https://img.shields.io/npm/v/generator-nd.svg?style=flat-square)](https://npmjs.org/package/generator-nd)
 [![Build Status](https://img.shields.io/travis/ndfront/generator-nd.svg?style=flat-square)](https://travis-ci.org/ndfront/generator-nd)
 [![NPM downloads](http://img.shields.io/npm/dm/generator-nd.svg?style=flat-square)](https://npmjs.org/package/generator-nd)
